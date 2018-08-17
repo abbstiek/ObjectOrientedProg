@@ -1,0 +1,252 @@
+#include <iostream>
+#include "time.h"
+using namespace std;
+
+Time::Time()
+{
+	DefaultTime();
+}
+
+Time::Time(int s) // resets counter if it goes over 60 for s+m, 24 for hs, adds one to each before
+{
+	DefaultTime();
+	seconds=s; 
+        Convert();
+}
+
+Time::Time(int d, int h, int m, int s) //if invalid time is entered, sets to 0, also sets ints to member data
+{
+	DefaultTime();
+	if (set(d,h,m,s)==true)
+		{
+		    days = d;
+      		    hours = h;
+       		    minutes = m;
+	            seconds = s;
+		}		
+}
+
+void Time::DefaultTime()
+{
+	days = 0;
+	hours = 0;
+	minutes = 0;
+	seconds = 0;
+}
+
+ostream& operator <<(ostream& os, const Time& t1) //output function
+{
+        os << t1.days<< "~" << t1.hours<< ":" << t1.minutes << ":" <<t1.seconds<<endl;
+	return os;
+	if (t1.days>1)
+		os <<  t1.days << "~";
+	else 
+		os << "0" << "~" ;
+	if (t1.hours>9)
+		os << t1.hours << ":";
+	else 
+		os << "0" << t1.hours << ":";
+	if (t1.minutes>9)
+		os << t1.minutes << ":";
+	else 
+		os << "0" << t1.minutes <<":";
+	if (t1.seconds>9)
+		os << t1.seconds << endl;
+	else
+		os << "0" << t1.seconds << endl;
+	return os;
+}
+
+istream& operator >>(istream& is, Time& t1) //input function
+{	
+	
+	char x;
+	is >> t1.days >> x >> t1.hours >> x >> t1.minutes >>  x >> t1.seconds;
+	t1.Convert(t1.days, t1.hours, t1.minutes, t1.seconds);
+	if (t1.days<0||t1.hours<0||t1.minutes<0||t1.seconds<0)
+		t1.DefaultTime();
+	return is;
+}
+
+Time operator+(const Time&t1, const Time& t2) //addition operator
+{	
+	
+	Time AddResult;
+	AddResult.days=t1.days+t2.days;
+	AddResult.hours=t1.hours+t2.hours;
+	AddResult.minutes=t1.minutes+t2.minutes;
+	AddResult.seconds=t1.seconds+t2.seconds;
+	return AddResult;
+}
+
+
+Time operator-(const Time&t1, const Time&t2) //subtraction operator
+{
+	Time SubResult;
+	SubResult.days=t1.days-t2.days;
+	SubResult.hours=t1.hours-t2.hours;
+	SubResult.minutes=t1.minutes-t2.minutes;
+	SubResult.seconds=t1.seconds-t2.seconds;
+	return SubResult;
+}
+
+Time operator*(const Time&t1, int x) //multiplication operator
+{
+	return Time(t1.days * x, t1.hours * x, t1.minutes * x, t1.seconds * x);
+}
+
+int Check (const Time& t1)
+{
+        int temp=0;
+        temp = temp+ t1.seconds;
+        temp =temp+(t1.minutes*60);
+        temp = temp +(t1.hours*3600);
+        temp = temp + (t1.days*86400);
+        return temp;
+}
+
+bool operator<(const Time& t1, const Time& t2) //less than bool operator
+{
+	if (Check(t1)<Check(t2))
+		return true;
+	else
+		return false;
+}
+
+
+bool operator>(const Time& t1, const Time& t2) //greater than bool operator
+{
+	if (Check(t1)>Check(t2))
+		return true;
+	else
+		return false;
+}
+
+bool operator<=(const Time& t1, const Time& t2) //less than or equal to bool operator
+{
+	if (Check(t1)<=Check(t2))
+		return true;
+	else 
+		return false;
+}
+
+bool operator>=(const Time& t1, const Time& t2) //greater than or equal to bool operator
+{
+	if (Check(t1)>=Check(t2))
+		return true;
+	else
+		return false;
+}
+
+bool operator==(const Time& t1, const Time& t2) //if two values are equal, bool returns true
+{
+	if (Check(t1)==Check(t2))
+		return true;
+	else
+		return false;
+}
+
+bool operator!=(const Time& t1, const Time& t2)// if two values are not equal, bool returns true
+{
+	if (Check(t1)!=Check(t2))
+		return true;
+	else
+		return false;
+}
+
+Time& Time::operator++() //pre increment of time
+{
+	seconds=seconds+1;
+	return *this;
+}
+
+Time Time::operator++(int) //post increment of time
+{	
+	Time temp = *this;
+	seconds = seconds + 1;
+	return temp;	
+}
+
+Time& Time::operator--() //pre decrement of time
+{
+	seconds = seconds - 1;
+	return *this;
+}
+
+Time Time::operator--(int) //post decrement of time
+{
+	Time temp = *this;
+	seconds = seconds - 1;
+	return temp;
+}
+
+int Time::set (int d, int h, int m, int s) //if any of the values 
+entered are less than 0, will set them to 0
+{
+	if (d<0)
+		return false;
+	if (h<0 || h>=24)
+		return false;
+	if (m<0 || m>= 60)
+		return false;
+	if (s<0 || s >= 60)
+		return false;	
+}
+
+void Time::Convert ()
+{
+	do 
+	{
+	if (seconds>=60)
+        {
+                seconds-=60;
+                minutes+=1;
+        }
+        if (minutes>=60)
+        {
+                minutes-=60;
+                hours+=1;
+        }
+        if(hours>=24)
+        {
+                hours-=24;
+                days+=1;
+        }
+	}while (hours>=24 || minutes>=60 || seconds>=60); 
+}
+
+void Time::Convert(int d, int h, int m, int s)
+{
+	m+= (s/60);
+	s=(s%60);
+	h+=m/60;
+	m=m%60;
+	d+=h/24;
+	h=h%24;
+	cout << d << " " << s;
+
+	days = d;
+	hours=h;
+	minutes=m;
+	seconds=s;
+/*
+	 do 
+        {
+        if (s>=60)
+        {
+                s-=60;
+                m+=1;
+        }
+        if (m>=60)
+        {
+                m-=60;
+                h+=1;
+        }
+        if(h>=24)
+        {
+                h-=24;
+                d+=1;
+        }
+        }while (h>=24 || m>=60 || s>=60); 
+*/}
+

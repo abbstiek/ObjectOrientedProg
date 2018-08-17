@@ -1,0 +1,159 @@
+#include <iostream>
+#include "temperature.h"
+#include <ctype.h>
+#include <iomanip>
+using namespace std; 
+
+//SetFormat how to get char to int
+//weird error for const
+
+Temperature::Temperature (double temp, char scale
+)
+{
+	temp = 0;
+	scale = 'C';
+	if (SetScale(scale)==false)
+		SetScale('C'); //defaults
+	
+}
+
+void Temperature::Input()
+{
+	if (scale != 'C' || scale !='c' || scale !='f' || scale != 'F' 
+	|| scale != 'K' || scale != 'k') //checks that valid scale used
+		{			//if not, loops
+			cout << "Invalid scale. Try again: ";
+		}
+	if (scale == 'c'||scale=='C') // checks that valid temp used C
+		{ 
+			if (degree<=-273.15)
+			cout << "Invalid Temperature. Try again: ";
+		}
+	if (scale == 'f' || scale == 'F') //checks that valid temp used
+		{
+			if (degree<=-459.67)
+			cout <<"Invalid Temperature. Try again: ";
+		}
+	if (scale == 'k' || scale == 'K') //checks that valid temp used
+		{
+			if (degree<0)
+			cout <<"Invalid Temperature. Try again: ";
+		}
+
+}	
+void Temperature::Show()
+{
+	bool SetFormat (scale); //displays the proper called format
+}
+
+bool Temperature::SetScale (char s)
+{
+	if (s !='C' || s !='c' || s !='f' || s != 'F' || s
+	!= 'K' || s != 'k')
+	{	
+		scale == 'C'; // converts all other scales to C for the 
+				//default
+		return false;
+	}
+	else
+	{
+		s=scale; //sets default of C
+		return true;
+	}
+}
+
+double Temperature::GetDegrees()
+{
+	return degree; //returns temp used
+}
+
+char Temperature::GetScale()
+{
+	return scale; //returns char of scale used
+}
+
+bool Temperature::SetFormat (char f)
+{
+	switch (f)
+	{
+	 case 'P':
+		std::setprecision(2); //only need one decimal's place
+		 if (scale == 'c')
+                        scale == 'C';
+                if (scale == 'f')
+                        scale == 'F';
+                if (scale == 'k')
+                        scale == 'K';
+		break;
+	case 'L': 
+		std::setprecision(5); // to get 4 decimal #s 
+		int scale; 	// to get char to change to int?
+		if (scale == 'c'||scale == 'C')
+			scale == 'Celsius';
+		else if (scale == 'f'||scale == 'F')
+			scale == 'Fahrenheit';
+		else
+			scale == 'Kelvin';
+			break;
+	default:
+		std::setprecision(5); // to get 4 decimal #s 
+		if (scale == 'c')
+			scale == 'C';
+		if (scale == 'f')
+			scale == 'F';
+		if (scale == 'k')
+			scale == 'K';
+	}
+
+}
+
+void Temperature::Convert (char sc)
+{
+	if (scale == 'f' || scale == 'F')
+		{
+			if (sc== 'c'||sc=='C')
+			{
+				degree=(degree-32)*(5/9);	// f ->c
+			}
+			if (sc=='k'||sc=='K')
+			{
+				degree=(degree+459.67)*(5/9); // f->k
+			}
+		}
+	if (scale=='c' || scale=='C')
+		{	
+			if (sc=='f' || sc=='F') //c-f
+			{
+				degree=(degree*(9/5))+32;
+			}
+			if (sc=='k'||sc=='K') //c->k
+			{
+				degree=(degree+273.15);
+			}
+		}
+	if (scale=='k' || scale=='K')
+		{
+			if (sc=='f' || sc=='F') //k-->f
+			{
+				degree=(degree*(9/5))-459.67;
+			}
+			if (sc=='C' || sc=='c')//k-->c
+			{
+				degree=degree-273;
+			}
+		}		
+}
+
+int Temperature::Compare ( Temperature& d)
+{
+	d.Convert(GetScale()); //convert all numbers to common scale
+	if (d.degree > degree) //returns 1 if first number is higher
+	return 1;
+	else if (degree >d.degree)
+	return -1;
+	else
+	return 0;
+}
+
+
+

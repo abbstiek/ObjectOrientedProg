@@ -1,0 +1,33 @@
+#include <iostream>
+
+// starter file for MyInt class header
+class MyInt
+{
+	friend ostream& operator<<(ostream& os, const MyInt& x);
+	friend istream& operator>>(istream&is, MyInt& x);
+   friend MyInt operator+ (const MyInt& x, const MyInt& y);
+   friend bool operator< (const MyInt& x, const MyInt& y);
+   friend bool operator> (const MyInt& x, const MyInt& y);
+   friend bool operator<= (const MyInt& x, const MyInt& y);
+   friend bool operator>= (const MyInt& x, const MyInt& y);
+   friend bool operator== (const MyInt& x, const MyInt& y);
+   friend bool operator!= (const MyInt& x, const MyInt& y);
+   friend MyInt operator* (const MyInt& x, const MyInt& y);
+public:
+   MyInt();
+   MyInt(char mystring[]);		// first constructor
+   MyInt& operator++ ();
+   MyInt operator++(int);
+   MyInt (const MyInt& x); //COPY
+   MyInt& operator= (const MyInt &); //ASSIGNEMNT
+   ~MyInt (); //DESTRUCTOR
+private:
+	int *p; //pointer
+	void Resize(); //resize integer array
+	int C2I (char);
+	int showsize();
+	int currentsize;
+	int maxsize;
+	void Reverse();
+};
+

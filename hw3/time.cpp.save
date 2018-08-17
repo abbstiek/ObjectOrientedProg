@@ -1,0 +1,97 @@
+#include <iostream>
+#include "time.h"
+using namespace std;
+
+Time::Time() : hours(24), minutes(60), seconds(60)
+{
+
+}
+
+Time::Time(int s)
+{
+
+}
+
+Time::Time(int d, int h, int m, int s)
+{
+
+}
+
+ostream& operator <<(ostream& os, const Time& t1)
+{
+	os << t1.days<< "~" 
+}
+
+istream& operator >>(istream& is, Time&)
+{
+
+}
+
+Time operator+(const Time&t1, const Time& t2) 
+{
+return Time(t1.days + t2.days, t1.hours + t2.hours, t1.minutes + t2.minutes, 
+t1.seconds + t2.seconds);
+}
+
+Time operator-(const Time&t1, const Time&t2)
+{
+return Time(t1.days - t2.days, t1.hours - t2.hours, t1.minutes -t2.minutes,
+t1.seconds - t2.seconds);
+}
+
+Time operator*(consst Time&t1, int x)
+{
+
+}
+
+Time operator<(const Time& t1, const Time& t2)
+{
+
+}
+
+Time operator>(const Time& t1, const Time& t2)
+{
+
+}
+
+Time operator<=(const Time& t1, const Time& t2)
+{
+
+}
+
+Time operator>=(const Time& t1, const Time& t2)
+{
+
+}
+
+Time operator==(const Time& t1, const Time& t2)
+{
+
+}
+
+Time operator!=(const Time& t1, const Time& t2)
+{
+
+}
+
+Time& Time::operator++()
+{
+
+}
+
+Time Time::operator++(int)
+{
+
+}
+
+Time& Time::operator--()
+{
+
+}
+
+Time Time::operator--(int)
+{
+
+}
+
+

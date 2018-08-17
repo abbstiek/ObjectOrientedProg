@@ -1,0 +1,118 @@
+#include <iostream>
+#include "triangle.h"
+#include <cmath>
+using namespace std;
+
+Triangle::Triangle(int s, char bord, char filler)
+{
+	if (size>39)
+		size=39;
+	else if (size<1)
+		size=1;
+	else
+        	size=s;
+
+	
+	if (setBorder(bord)==false)
+	{
+		setBorder('#');
+	}
+	if (setFill(filler)==false)
+		setFill('*');
+	
+}
+
+int Triangle::GetSize()
+{
+	return size;
+}
+
+int Triangle::Perimeter()
+{
+	return (size*3);	
+}
+
+double Triangle::Area()
+{
+ 	double area = ((sqrt(3)/4)*(size*size);
+	return area;	
+}
+
+void Triangle::Grow()
+{
+	if (size<39)
+	size+=1;
+}
+
+void Triangle::Shrink()
+{
+	if (size>1)
+	size-=1;
+}
+
+bool Triangle::SetBorder(char x)
+{
+	if (x>=33||x<=126)
+	{
+		border=x;
+		return true;
+	}
+	else	
+	{
+		border='#';
+		return false;	
+	}
+}
+
+bool Triangle::SetFill(char y)
+{
+	if (x>=33||x<126)
+	{
+		border=y;
+		return true;
+	}
+	else 
+	{
+		fill='*';
+		return false;
+
+	}
+
+void Triangle::Draw()
+{
+
+	for (int i=0; i<=size; i++)
+	{
+	if (i==0)
+	{
+		for (int a=0; a<size-1;a++)
+		cout <<" ";
+		cout << border;
+		cout << endl;
+	}
+	if (i==1)
+	{
+		for (int b=0;b<size-2;b++)
+		cout << " ";
+		cout << border << " " << border;
+	}
+	if (i>1 && i<size-1)
+	{
+		for (int c=i; c<size-1;c++)
+		{
+			cout << " ";	
+		}
+		cout <<border;
+	}
+	for 
+	
+
+void Triangle::Summary()
+{
+cout <<"Size of triangle's side = " <<size << " units";
+cout <<"Perimeter of triangle = " <<perimeter <<" units";
+cout <<"Area of triangle = "<<area<< " units";
+cout <<"Triangle looks like: " << endl<< Draw()<<endl;
+}
+
+

@@ -1,0 +1,188 @@
+#include <iostream>
+#include <cctype>
+#include "myint.h"
+using namespace std;
+
+
+
+MyInt::MyInt()
+{
+	currentsize=0;
+	maxsize=currentsize+4;
+	p= new p2[maxsize];
+}
+
+MyInt::MyInt(char mystring[])
+{
+	int j = sizeof(mystring)/sizeof(mystring[0]); //to find size of 
+							//char array
+	
+	p = new int[maxsize];
+	
+	delete [] p;
+	p = NULL;
+}
+
+MyInt::MyInt(const MyInt& x) //copies object 'x' into the new object 
+				//being created
+{
+  maxsize = x.maxsize; 
+  currentsize = x.currentsize; 
+  // create a new dynamic array 
+  p = new int[x.maxsize]; 
+  // copy the dynamic data 
+  for (int i = 0; i < currentsize; i++) 
+    p[i] = x.p[i]; 
+}
+
+MyInt& MyInt::operator=(const MyInt& x) //copies object 'd' into new obj 
+{
+	if (this != &x)  
+  { 
+    //delete any information currently attached 
+    delete [] p; 
+    // basically the copy constructor
+    maxsize = x.maxsize; 
+    currentsize = x.currentsize; 
+    p = new int[x.maxsize]; 
+    for (int i = 0; i < currentsize; i++) 
+      p[i] = x.p[i]; 
+  } 
+  return *this;     // return the object itself (by reference) 
+}
+
+MyInt::~MyInt()
+{
+	delete [] p;
+}
+
+// converts character into integer (returns -1 for error)
+int MyInt::C2I(char c)
+{
+   if (c < '0' || c > '9')	return -1;	// error
+   return (c - '0');				// succecss
+}
+
+// Add in operator overload and member function definitions 
+ostream& operator <<(ostream& os, const MyInt& x)
+{
+	int fun = o.p[0];
+	for (int q=1; q<currentsize;q++)
+	{
+		fun*=10;
+		fun=fun+o.p[q];
+	}
+	os << fun;
+	return os;
+}
+
+void MyInt::PrintArray(ostream& os) const
+{
+	if(currentsize=0)
+	os <<"Em
+
+
+istream& operator >>(istream& is, MyInt& x)
+{
+while (isdigit(is.peek()))
+{
+char ch;
+is>>ch;
+p[currentsize] = ch;
+currentsize++;
+x.Resize();
+return is;	
+}
+
+MyInt operator+ (const MyInt& x, const MyInt& y)
+{
+	
+}
+
+bool operator< (const MyInt& x, const MyInt& y)
+{
+//compare the # of elements in array
+	
+}
+
+bool operator>(const MyInt& x, const MyInt& y)
+{
+
+}
+
+bool operator<= (const MyInt& x, const MyInt& y)
+{
+	if
+	return true;
+	else
+	return false;
+}
+
+bool operator>= (const MyInt& x, const MyInt& y)
+{
+	if 
+	return true;
+	else
+	return false;
+}
+
+bool operator== (const MyInt& x, const MyInt& y)
+{
+	//compare # of elements in array, then compare content
+	if 
+	return true;
+	else
+	return false;
+}
+
+bool operator!= (const MyInt& x, const MyInt& y)
+{
+	if ( )
+	return true;
+	else
+	return false;
+}
+
+MyInt operator* (const MyInt& x, const MyInt& y)
+{
+	
+}
+
+MyInt& MyInt::operator++() //pre increment
+{
+	p[currentsize-1]+=1;
+	return *this;
+}
+
+MyInt MyInt::operator++(int) //post increment
+{
+	MyInt temp = *this;
+	currentsize=currentsize+1;
+	return temp;
+}
+
+void MyInt::Resize()
+{
+ maxsize = currentsize+5;
+ int * newarr = new int[maxsize]; //allocate a new array
+for (int i=0; i<currentsize;i++)
+	newarr[i]=p[i]; //copy each entry into new array
+delete [] p; //remove old array 
+p=newarr; //points old name to new array
+}
+
+int MyInt::showsize()
+{
+	return currentsize;
+}
+
+void MyInt::Reverse()
+{
+	int temp, count;
+	for (int i = 0; i< (count/2); ++i)
+		{
+		temp = array[count-i-1];
+		array[count-i-1]=array[i];
+		array[i]=temp;
+		}
+}

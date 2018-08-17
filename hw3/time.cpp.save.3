@@ -1,0 +1,138 @@
+#include <iostream>
+#include "time.h"
+using namespace std;
+
+Time::Time() : days (0), hours(0), minutes(0), seconds(0)
+{
+
+}
+
+Time::Time(int s)
+{
+ 	int d, int h, int m;
+	if (h>=24)
+	{
+		h=mi
+}
+
+Time::Time(int d, int h, int m, int s)
+{
+	if (set(d,h,m,s) == false)
+		set (0,0,0);
+}
+
+ostream& operator <<(ostream& os, const Time& t1)
+{
+        os << t1.days<< "~" << t1.hours<< ":" << t1.minutes << ":" <<t1.seconds;
+	return os;
+}
+
+istream& operator >>(istream& is, Time&)
+{
+	char x;
+	is >> t1.days >> x >> t1.hours >> x >> t1.minutes >>  x >> t1.seconds;
+	return is;
+}
+
+Time operator+(const Time&t1, const Time& t2) 
+{
+	return Time(t1.days + t2.days, t1.hours + t2.hours, t1.minutes + t2.minutes, 
+	t1.seconds + t2.seconds);
+}
+
+
+Time operator-(const Time&t1, const Time&t2)
+{
+	return Time(t1.days - t2.days, t1.hours - t2.hours, t1.minutes -t2.minutes, t1.seconds - t2.seconds);
+}
+
+Time operator*(const Time&t1, int x)
+{
+	return Time(t1.days * x, t1.hours * x, t1.minutes * x, t1.seconds * x);
+}
+
+bool operator<(const Time& t1, const Time& t2)
+{
+	if (t1<t2)
+		return true;
+	else
+		return false;
+}
+
+bool operator>(const Time& t1, const Time& t2)
+{
+	if (t1>t2)
+		return true;
+	else
+		return false;
+}
+
+bool operator<=(const Time& t1, const Time& t2)
+{
+	if (t1<=t2)
+		return true;
+	else 
+		return false;
+}
+
+bool operator>=(const Time& t1, const Time& t2)
+{
+	if (t1>=t2)
+		return true;
+	else
+		return false;
+}
+
+bool operator==(const Time& t1, const Time& t2)
+{
+	if (t1==t2)
+		return true;
+	else
+		return false;
+}
+
+bool operator!=(const Time& t1, const Time& t2)
+{
+	if (t1!=t2)
+		return true;
+	else
+		return false;
+}
+
+Time& Time::operator++()
+{
+	seconds=seconds+1;
+	return *this;
+}
+
+Time Time::operator++(int)
+{	
+	Time temp = *fun;
+	seconds = seconds + 1;
+	return temp;	
+}
+
+Time& Time::operator--()
+{
+	seconds = seconds - 1;
+	return *this;
+}
+
+Time Time::operator--(int)
+{
+	Time temp = *fun;
+	seconds = seconds - 1;
+	return temp;
+}
+
+bool Time::set (int d, int h, int m, int s)
+{
+	if (d<0)
+		return false;
+	if (h<0 || h>=24)
+		return false;
+	if (m < 0 || m>= 60)
+		return false;
+	if (s < 0 || s >= 60)
+		return false;	
+}

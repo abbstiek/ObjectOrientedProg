@@ -1,0 +1,118 @@
+#include <iostream>
+#include "temperature.h"
+#include <ctype>
+#include <iomanip>
+using namespace std; 
+
+Temperature::Temperature (double temp, char scale)
+{
+	double temp = 0;
+	char scale = 'C'
+	if (SetScale(s)==false)
+		SetScale('C');
+
+}
+
+void Temperature::Input();
+{
+	if (scale != 'C' || scale !='c' || scale !='f' || scale != 'F' 
+	|| scale != 'K' || s != 'k')
+		{
+			cout << "Invalid scale. Try again: ";
+		}
+	if (scale = 'c'||scale ='C')
+		{ 
+			if (degree<=-273.15)
+			cout << "Invalid Temperature. Try again: ";
+		}
+	if (scale = 'f' || scale = 'F')
+		{
+			if (degree<=-459.67)
+			cout <<"Invalid Temperature. Try again: ";
+		}
+	if (scale = 'k' || scale = 'K')
+		{
+			if (degree<0)
+			cout <<"Invalid Temperature. Try again: ";
+		}
+
+}	
+void Temperature::Show();
+{
+
+}
+
+bool Temperature::SetScale (char s);
+{
+	if (s !='C' || s !='c' || s !='f' || s != 'F' || s
+	!= 'K' || s != 'k')
+	{	
+		scale  = 'C';
+		return false;
+	}
+	else
+	{
+		s=scale;
+		return true;
+	}
+}
+
+bool SetDegrees (double deg)
+
+
+double Temperature::GetDegrees();
+{
+	if (
+}
+
+bool Temperature::SetFormat (char f);
+{
+
+}
+
+bool Temperature::Convert (char sc);
+{
+	if (scale = 'f' || scale = 'F')
+		{
+			if (sc= 'c'||sc='C')
+			{
+				degree=(degree-32)*(5/9);
+			}
+			if (sc='k'||sc='K')
+			{
+				degree=(degree+459.67)*(5/9);
+			}
+		}
+	if (scale='c' || scale='C')
+		{	
+			if (sc=	'f' || sc='F')
+			{
+				degree=(degree*(9/5))+32;
+			}
+			if (sc='k'||sc='K')
+			{
+				degree=(degree+273.15);
+			}
+		}
+	if (scale='k' || scale='K')
+		{
+			if (sc='f' || sc='F')
+			{
+				degree=(degree*(9/5))-459.67;
+			}
+			if (sc='C' || sc='c')
+			{
+				degree=degree-273;
+			}
+		}		
+}
+
+int Temperature::Compare (const Temperature& d);
+{
+
+}
+
+void Temperature::Increment (int deg, char sc);
+{
+
+}
